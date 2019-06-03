@@ -31,12 +31,41 @@
         <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your cart</span>
-                <span class="badge badge-secondary badge-pill">3</span>
             </h4>
+            <h3 id="ex_email"></h3>
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="reference_label">Reference</h6>
+                    </div>
+                    <span class=" col-md-6 text-muted" id="reference_number"></span>
 
                 </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="address_label">Address</h6>
+                    </div>
+                    <small class=" col-md-6 text-muted" id="address_full"></small>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="suffix_label">Street Suffix</h6>
+                    </div>
+                    <span class=" col-md-6 text-muted" id="street_suffix"></span>
+
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="municipality_label">Municipality</h6>
+                    </div>
+                    <span class=" col-md-6 text-muted" id="municipality"></span>
+
+                </li>
+
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (CAD)</span>
                     <strong id="total_price">$20</strong>
@@ -45,9 +74,9 @@
 
             <form class="card p-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
+                    <input type="text" class="form-control" placeholder="Promo code" id="coupon_code">
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                        <button id="coupon_button" type="submit" class="btn btn-secondary">Redeem</button>
                     </div>
                 </div>
             </form>
@@ -224,13 +253,55 @@
 
 <script>
     $(document).ready(function () {
-
-
+        var $finalPriceText = $("#total_price");
         console.log("ready!");
 
-        const client = JSON.parse(window.localStorage.getItem("client_data"));
+        var appendClientData = function () {
 
-        console.log(client);
+            var client = $.parseJSON(window.localStorage.getItem("client_data"));
+            if (client !== null) {
+                console.log(client)
+                $("#reference_number").text(client["reference"]);
+
+                var address = client["unitNumber"] + ", " + client["unitNumber"] + " " + client["streetNumber"] + ", " + client["street Name"] + ", " + client["city"] + ", " + client["zip"];
+
+                $("#address_full").text(address);
+
+                $("#street_suffix").text(client["streetSuffix"]);
+                $("#municipality").text(client["municipality"]);
+                $("#client_lastName").text(client["clientLastName"])
+
+                var orderby_fullName = client["orderFirstName"] + " " + client["orderLastName"];
+
+                $("ordered_by").text(orderby_fullName);
+
+                $("#client_email").text(client["email"])
+                $("#phone_number").text(client["phoneNumber"])
+                $("#photo_link").text(client["photoLink"])
+
+                $("#date-time").text(client["date"] + " " + client["time"]);
+
+            } else {
+                console.log("no client data found from local storage, please go fill out the detail request form!")
+            }
+        };
+
+        $("#coupon_button").on("click", function () {
+            var coupon = $("#coupon_code").value;
+
+            if (coupon === "drive-by-photos-001") {
+
+                $finalPriceText.text(0.00);
+
+            } else {
+                alert("Sorry, that coupon code isn't valid! Try again later or contact us at \n info@valuforce.ca");
+            }
+        });
+
+
+        appendClientData();
+
+
     });
     </script>
 </body>
