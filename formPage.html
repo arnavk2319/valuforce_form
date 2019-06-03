@@ -45,7 +45,7 @@
         <a class="btn btn-primary btn-lg" href="http://valueforce.thelearnapp.com/about-us/" role="button">Learn more about Valuforce</a>
     </p>
 </div>
-<form class="container">
+    <form class="container" id="appointment_form">
 
 
     <div class="form-group">
@@ -191,7 +191,7 @@
     var street_name = document.getElementById("street_name").value;
     var street_suffix = document.getElementById("street_suffix").value;
         var municipal = document.getElementById("municipality").value;
-        var inputCity = document.getElementById("input_city").value;
+        var inputCity = document.getElementById("province").value;
         var inputZip = document.getElementById("input_zip").value;
     var legal_description = document.getElementById("legal_description").value;
     var client_lastName = document.getElementById("client_lastName").value;
@@ -225,8 +225,13 @@
 
         $("#submit_form").on("click", function () {
 
-            window.localStorage.setItem('client_data', JSON.stringify(client));
-            window.location.href = "./checkoutPage.html";
+            if (email_input === email_confirm) {
+                window.localStorage.setItem('client_data', JSON.stringify(client));
+                window.location.href = "./checkoutPage.html";
+            } else {
+                alert("Please check if you have confirmed your email incorrectly!");
+            }
+
 
         });
 
