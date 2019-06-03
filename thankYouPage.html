@@ -38,13 +38,26 @@
     <div class="text-center jumbotron">
         <h1 class="display-4">Thank You!</h1>
         <br>
-        <h4 class="lead" >Email sent to : email_val</h4>
+        Email Sent to:<h4 class="lead" id="email_val"></h4>
         <br>
         <h4 class="lead" >We will be coming for the inspection on :</h4>
         <br>
-        <h4 class="lead" >date_val</h4>
-        <br>
-        <h4 class="lead" >time_val</h4>
+        <h4 class="lead" id="date_time_val"></h4>
 
     </div>
+
+<script>
+ var appendClientData = function () {
+            var thanks = $.parseJSON(window.localStorage.getItem("thanks_data"));
+            if (thanks !== null) {
+                console.log(thanks)
+                $("#email_val").text(thank_you["date-time"]);
+                $("#date_time_val").text(thank_you["email"]);
+            } else {
+                console.log("no client data found from local storage, please go fill out the detail request form!")
+            }
+        };
+</script>
+</body>
+</html>
 
