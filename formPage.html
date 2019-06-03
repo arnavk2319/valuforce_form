@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="./js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="jquery-3.4.0.min.js"></script>
+
     <title>Details Page</title>
 </head>
 <body >
@@ -58,8 +59,8 @@
 
     <div class="form-row">
         <div class="form-group col-md-3">
-            <label for="unit_no">Unit Number</label>
-            <input type="text" class="form-control" id="unit_no" placeholder="eg. 2341">
+            <label for="unit_number">Unit Number</label>
+            <input type="text" class="form-control" id="unit_number" placeholder="eg. 2341">
         </div>
         <div class="form-group col-md-3">
             <label for="street_number">Street Number</label>
@@ -87,8 +88,8 @@
 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity" required>
+            <label for="input_city">City</label>
+            <input type="text" class="form-control" id="input_city" required>
         </div>
         <div class="form-group col-md-4">
             <label for="province">Select Province</label>
@@ -109,8 +110,8 @@
             </select>
         </div>
         <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip" required>
+            <label for="input_zip">Zip</label>
+            <input type="text" class="form-control" id="input_zip" required>
         </div>
     </div>
 
@@ -169,140 +170,68 @@
         <label for="photo_link">Email for Photo Delivery</label>
         <input type="email" class="form-control" id="photo_link" placeholder="example@domain.com">
     </div>
-
+</form>
 
     <div class=" form-group text-center ">
 
-        <button type="submit" class="btn btn-dark btn-lg btn-block" onclick="setMyStorage">Submit</button>
+        <button type="submit" class="btn btn-dark btn-lg btn-block" id="submit_form">Submit</button>
     </div>
-
-
-</form>
 </div>
 <script language="JavaScript">
 
-function setMyStorage()
-    {
     $( document ).ready(function() {
 
 
         console.log( "ready!" );
-    });
 
 
-    var ref_no = document.getElementById("reference_no").value;
-    var unit_no = document.getElementById("unit_no").value;
+        var ref_no = document.getElementById("reference_number").value;
+        var unit_no = document.getElementById("unit_number").value;
     var street_no = document.getElementById("street_number").value;
     var street_name = document.getElementById("street_name").value;
     var street_suffix = document.getElementById("street_suffix").value;
-    var municipality = document.getElementById("municipality").value;
-    var inputCity = document.getElementById("inputCity").value;
-    var inputZip = document.getElementById("inputZip").value;
+        var municipal = document.getElementById("municipality").value;
+        var inputCity = document.getElementById("input_city").value;
+        var inputZip = document.getElementById("input_zip").value;
     var legal_description = document.getElementById("legal_description").value;
     var client_lastName = document.getElementById("client_lastName").value;
     var orderby_firstName = document.getElementById("orderby_firstName").value;
     var orderby_lastName = document.getElementById("orderby_lastName").value;
-    var email = document.getElementById("email").value;
+        var email_input = document.getElementById("email").value;
     var email_confirm = document.getElementById("email_confirm").value;
     var phone_number = document.getElementById("phone_number").value;
     var special_instructions = document.getElementById("special_instructions").value;
     var photo_link = document.getElementById("photo_link").value;
 
-    const ref_no_val = {
-    name: ref_no,
-    }
+        const client = {
+            reference: ref_no,
+            unitNumber: unit_no,
+            streetNumber: street_no,
+            streetName: street_name,
+            streetSuffix: street_suffix,
+            municipality: municipal,
+            city: inputCity,
+            zip: inputZip,
+            legalDescription: legal_description,
+            clientLastName: client_lastName,
+            orderFirstName: orderby_firstName,
+            orderLastName: orderby_lastName,
+            email: email_input,
+            phoneNumber: phone_number,
+            specialInstructions: special_instructions,
+            photoLink: photo_link
+        };
 
-    window.localStorage.setItem('reference_number', JSON.stringify(ref_no_val));
 
-    const unit_no_val = {
-    name = unit_no,
-    }
+        $("#submit_form").on("click", function () {
 
-    window.localStorage.setItem('unit_number', JSON.stringify(unit_no_val));
+            window.localStorage.setItem('client_data', JSON.stringify(client));
+            window.location.href = "./checkoutPage.html";
 
-    const street_no_val = {
-    name = street_no,
-    }
+        });
 
-    window.localStorage.setItem('street_number', JSON.stringify(street_no_val));
 
-    const street_name_val = {
-    name = street_name,
-    }
-
-    window.localStorage.setItem('street_name', JSON.stringify(street_name_val));
-
-    const street_suffix_val = {
-    name = street_suffix,
-    }
-
-    window.localStorage.setItem('street_suffix', JSON.stringify(street_suffix_val));
-
-    const municipality_val = {
-    name = municipality,
-    }
-
-    window.localStorage.setItem('municipality', JSON.stringify(municipality_val));
-
-    const inputCity_val = {
-    name = inputCity,
-    }
-
-    window.localStorage.setItem('input_city', JSON.stringify(inputCity_val));
-
-    const inputZip_val = {
-    name = inputZip,
-    }
-
-    window.localStorage.setItem('input_zip', JSON.stringify(inputZip_val));
-
-    const legal_description_val = {
-    name = legal_description,
-    }
-
-    window.localStorage.setItem('legal_desc', JSON.stringify(legal_description_val));
-
-    const client_lastName_val = {
-    name = client_lastName,
-    }
-
-    window.localStorage.setItem('client_lastName', JSON.stringify(client_lastName_val));
-
-    const first_name_val = {
-    name = orderby_firstName,
-    }
-
-    window.localStorage.setItem('first_name', JSON.stringify(first_name_val));
-
-    const last_name_val = {
-    name = orderby_lastName,
-    }
-
-    window.localStorage.setItem('last_name', JSON.stringify(last_name_val));
-
-    const email_val = {
-    name = email,
-    }
-
-    window.localStorage.setItem('email', JSON.stringify(email_val));
-
-    const confirm_email_val = {
-    name = email_confirm,
-    }
-
-    window.localStorage.setItem('confirm_email', JSON.stringify(confirm_email_val));
-
-    const phone_no_val = {
-    name = phone_number,
-    }
-
-    window.localStorage.setItem('phone_number', JSON.stringify(phone_no_val));
-
-    const photo_link_val = {
-    name = photo_link,
-    }
-
-    window.localStorage.setItem('photo_link', JSON.stringify(photo_link_val));
+    });
 
 
 </script>
