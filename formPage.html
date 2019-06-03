@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="jquery-3.4.0.min.js"></script>
+
     <title>Details Page</title>
 </head>
 <body >
 
 <!--NAVIGATION BAR-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
         <img src="./assets/valuForceLogo.png" width="178" height="100" class="d-inline-block align-top" alt="">
     </a>
@@ -35,8 +41,8 @@
     </div>
 </nav>
 
-<div class="container">
-<div class="text-center jumbotron">
+<div class="container-fluid">
+    <div class="text-center jumbotron jumbotron-fluid">
     <h1 class="display-4">Welcome!</h1>
     <p class="lead">The following information is required to request an Appointment</p>
     <hr class="my-4">
@@ -44,146 +50,181 @@
         <a class="btn btn-primary btn-lg" href="http://valueforce.thelearnapp.com/about-us/" role="button">Learn more about Valuforce</a>
     </p>
 </div>
-<form class="container">
+
+    <!--START OF MAIN PAGE FORM CONTENT-->
+    <div class="container">
+        <form>
 
 
-    <div class="form-group">
-        <label for="reference_number">Reference Number</label>
-        <input type="number" class="form-control" id="reference_number"  placeholder="Enter Reference Number" required>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="date-time">Pick a Date</label>
+                    <input type="text" class="form-control datetimepicker-input" id="date-time"
+                           data-toggle="datetimepicker" data-target="#date-time"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Select Time for an Appointment</label>
+                <select id="time" class="form-control" required>
+                    <option value="9:00">9 am</option>
+                    <option value="10:00">10 am</option>
+                    <option value="11:00">11 am</option>
+                    <option value="12:00">12 pm</option>
+                    <option value="13:00">1 pm</option>
+                    <option value="14:00">2 pm</option>
+                    <option value="15:00">3 pm</option>
+                    <option value="16:00">4 pm</option>
+                    <option value="17:00">5 pm</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="reference_number">Reference Number</label>
+                <input type="number" class="form-control" id="reference_number" placeholder="Enter Reference Number"
+                       required>
+            </div>
+
+            <!--SUBJECT PROPERTY SECTION-->
+
+            <h3> Subject Property Address</h3>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="unit_no">Unit Number</label>
+                    <input type="text" class="form-control" id="unit_no" placeholder="eg. 2341">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="street_number">Street Number</label>
+                    <input type="text" class="form-control" id="street_number" placeholder="eg. 123" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="street_name">Street Name</label>
+                    <input type="text" class="form-control" id="street_name" placeholder="Duke of York, etc." required>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="street_suffix">Street Suffix</label>
+                    <input type="text" class="form-control" id="street_suffix" placeholder="Enter Street Suffix">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="municipality">Street Suffix</label>
+                    <input type="text" class="form-control" id="municipality" placeholder="Enter Municipality" required>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="province">Select Province</label>
+                    <select id="province" class="form-control" required>
+                        <option value="AB">(AB) Alberta</option>
+                        <option value="BC">(BC) British Columbia</option>
+                        <option value="MB">(MB) Manitoba</option>
+                        <option value="NB">(NB) New Brunswick</option>
+                        <option value="NL">(NL) Newfoundland and Labrador</option>
+                        <option value="NS">(NS) Nova Scotia</option>
+                        <option value="ON">(ON) Ontario</option>
+                        <option value="PE">(PE) Prince Edward Island</option>
+                        <option value="QC">(QC) Quebec</option>
+                        <option value="SK">(SK) Saskatchewan</option>
+                        <option value="NT">(NT) Northwest Territories</option>
+                        <option value="NU">(NU) Nunavut</option>
+                        <option value="YT">(YT) Yukon</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" required>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="legal_description">Legal Description</label>
+                <textarea class="form-control" id="legal_description" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="client_lastName">Client's Last Name</label>
+                <input type="email" class="form-control" id="client_lastName" placeholder="Eg. Doe (John Doe)" required>
+
+            </div>
+
+
+            <!--ORDERED BY SECTION-->
+            <h3>Ordered By:</h3>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="orderby_firstName">First Name</label>
+                    <input type="text" class="form-control" id="orderby_firstName" placeholder="Enter First Name"
+                           required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="orderby_lastName">Last Name</label>
+                    <input type="text" class="form-control" id="orderby_lastName" placeholder="Enter Last name"
+                           required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+
+                <input type="email" class="form-control" id="email" placeholder="Enter email">
+
+                <small id="emailText" class="form-text text-muted">We'll never share your email with anyone else.
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="email_confirm">Confirm Email address</label>
+
+                <input type="email" class="form-control" id="email_confirm" placeholder="Enter email again" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="number" class="form-control" id="phone_number" placeholder="Enter Phone Number" required>
+            </div>
+
+            <div class="form-group ">
+                <label for="special_instructions">Special Instructions</label>
+                <textarea class="form-control" id="special_instructions" rows="2"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="photo_link">Email for Photo Delivery</label>
+                <input type="email" class="form-control" id="photo_link" placeholder="example@domain.com">
+            </div>
+
+
+            <div class=" form-group text-center ">
+
+                <button type="submit" class="btn btn-dark btn-lg btn-block" id="button_submit">Submit</button>
+            </div>
+
+
+        </form>
     </div>
-
-<!--SUBJECT PROPERTY SECTION-->
-
-    <h3> Subject Property Address</h3>
-
-    <div class="form-row">
-        <div class="form-group col-md-3">
-            <label for="unit_no">Unit Number</label>
-            <input type="text" class="form-control" id="unit_no" placeholder="eg. 2341">
-        </div>
-        <div class="form-group col-md-3">
-            <label for="street_number">Street Number</label>
-            <input type="text" class="form-control" id="street_number" placeholder="eg. 123" required>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="street_name">Street Name</label>
-            <input type="text" class="form-control" id="street_name" placeholder="Duke of York, etc." required>
-        </div>
-
-    </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="street_suffix">Street Suffix</label>
-            <input type="text" class="form-control" id="street_suffix"  placeholder="Enter Street Suffix">
-        </div>
-
-        <div class="form-group col-md-6">
-            <label for="municipality">Street Suffix</label>
-            <input type="text" class="form-control" id="municipality"  placeholder="Enter Municipality" required>
-        </div>
-    </div>
-
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity" required>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="province">Select Province</label>
-            <select id="province" class="form-control" required>
-                <option value="AB">(AB) Alberta</option>
-                <option value="BC">(BC) British Columbia</option>
-                <option value="MB">(MB) Manitoba</option>
-                <option value="NB">(NB) New Brunswick</option>
-                <option value="NL">(NL) Newfoundland and Labrador</option>
-                <option value="NS">(NS) Nova Scotia</option>
-                <option value="ON">(ON) Ontario</option>
-                <option value="PE">(PE) Prince Edward Island</option>
-                <option value="QC">(QC) Quebec</option>
-                <option value="SK">(SK) Saskatchewan</option>
-                <option value="NT">(NT) Northwest Territories</option>
-                <option value="NU">(NU) Nunavut</option>
-                <option value="YT">(YT) Yukon</option>
-            </select>
-        </div>
-        <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip" required>
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label for="legal_description">Legal Description</label>
-        <textarea class="form-control" id="legal_description" rows="3"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="client_lastName">Client's Last Name</label>
-        <input type="email" class="form-control" id="client_lastName" placeholder="Eg. Doe (John Doe)" required>
-
-    </div>
-
-
-    <!--ORDERED BY SECTION-->
-    <h3>Ordered By:</h3>
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="orderby_firstName">First Name</label>
-            <input type="text" class="form-control" id="orderby_firstName" placeholder="Enter First Name" required>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="orderby_lastName">Last Name</label>
-            <input type="text" class="form-control" id="orderby_lastName" placeholder="Enter Last name" required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="email">Email address</label>
-
-        <input type="email" class="form-control" id="email" placeholder="Enter email">
-
-        <small id="emailText" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-
-    <div class="form-group">
-        <label for="email_confirm">Confirm Email address</label>
-
-        <input type="email" class="form-control" id="email_confirm" placeholder="Enter email again" required>
-    </div>
-
-    <div class="form-group">
-        <label for="phone_number">Phone Number</label>
-        <input type="number" class="form-control" id="phone_number"  placeholder="Enter Phone Number" required>
-    </div>
-
-    <div class="form-group ">
-        <label for="special_instructions">Special Instructions</label>
-        <textarea class="form-control" id="special_instructions" rows="2"></textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="photo_link">Email for Photo Delivery</label>
-        <input type="email" class="form-control" id="photo_link" placeholder="example@domain.com">
-    </div>
-
-
-    <div class=" form-group text-center ">
-
-        <button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
-    </div>
-
-
-</form>
 </div>
 <script>
     $( document ).ready(function() {
 
+        $(function () {
+            $('#date-time').datetimepicker({
+                format: 'L'
+            });
+        });
 
-        console.log( "ready!" );
     });
 </script>
 </body>
